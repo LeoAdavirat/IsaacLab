@@ -163,3 +163,36 @@ UR10e_ROBOTIQ_GRIPPER_CFG.actuators["gripper_passive"] = ImplicitActuatorCfg(
 )
 
 """Configuration of UR-10E arm with Robotiq_2f_140 gripper."""
+
+
+# UR3e configuration from URDF (converted at runtime)
+UR3e_CFG = ArticulationCfg(
+    spawn=sim_utils.UrdfFileCfg(
+        asset_path="source/assets/urdf/universal_robots/ur3e/ur3e.urdf",
+        fix_base=True,
+        merge_fixed_joints=True,
+        # Use gains from URDF if available
+        joint_drive=sim_utils.UrdfConverterCfg.JointDriveCfg(
+            gains=sim_utils.UrdfConverterCfg.JointDriveCfg.PDGainsCfg(stiffness=None, damping=None)
+        ),
+        self_collision=False,
+    ),
+    init_state=ArticulationCfg.InitialStateCfg(
+        joint_pos={
+            # A comfortable tucked pose
+            "shoulder_pan_joint": 0.0,
+            "shoulder_lift_joint": -1.5707,
+            "elbow_joint": 1.5707,
+            "wrist_1_joint": -1.5707,
+            "wrist_2_joint": 1.5707,
+            "wrist_3_joint": 0.0,
+        },
+    ),
+    actuators={
+        "arm": ImplicitActuatorCfg(
+            joint_names_expr=[".*"],
+            stiffness=800.0,
+            damping=40.0,
+        ),
+    },
+)
