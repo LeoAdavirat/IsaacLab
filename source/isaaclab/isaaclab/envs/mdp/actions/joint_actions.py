@@ -193,6 +193,7 @@ class JointPositionAction(JointAction):
 
     def apply_actions(self):
         # set position targets
+        omni.log.info(self.processed_actions, self._joint_ids)
         self._asset.set_joint_position_target(self.processed_actions, joint_ids=self._joint_ids)
 
 
