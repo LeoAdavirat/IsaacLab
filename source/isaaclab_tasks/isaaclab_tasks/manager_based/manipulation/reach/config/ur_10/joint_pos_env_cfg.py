@@ -43,7 +43,12 @@ class UR10ReachEnvCfg(ReachEnvCfg):
         # override command generator body
         # end-effector is along x-direction
         self.commands.ee_pose.body_name = "wrist_3_link"
+        self.commands.ee_pose.ranges.pos_x = (0.20, 0.55)
+        self.commands.ee_pose.ranges.pos_y = (-0.15, 0.15)
+        self.commands.ee_pose.ranges.pos_z = (0.05, 0.45)
+        self.commands.ee_pose.ranges.roll = (0.0, 0.0)
         self.commands.ee_pose.ranges.pitch = (math.pi / 2, math.pi / 2)
+        self.commands.ee_pose.ranges.yaw = (-math.pi, math.pi)
 
 
 @configclass
